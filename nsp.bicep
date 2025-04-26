@@ -5,6 +5,8 @@ param associationResourceIds string[] = []
 param tags object = {}
 param logAnalyticsWorkspaceId string
 
+param resourceAccessMode ('Learning' | 'Enforced' | 'Audit') = 'Learning'
+
 var profileName = 'EncryptionProfile'
 var inboundIpv4AccessRuleName = 'InboundAccessRule'
 
@@ -69,7 +71,7 @@ resource resourceAssociations 'Microsoft.Network/networkSecurityPerimeters/resou
         id: profile.id
       }
 
-      accessMode: 'Learning'
+      accessMode: resourceAccessMode
     }
     tags: tags
   }

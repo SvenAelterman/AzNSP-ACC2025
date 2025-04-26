@@ -11,6 +11,7 @@ param allowInboundIpAddresses string[] = []
 
 param deployNsp bool = false
 param associateNsp bool = false
+param resourceAccessMode ('Learning' | 'Enforced' | 'Audit') = 'Learning'
 
 var keyName = 'AzureSqlTdeRSA'
 
@@ -167,6 +168,8 @@ module nspModule 'nsp.bicep' = if (deployNsp) {
   name: 'nspDeployment'
   params: {
     nspName: nspNameModule.outputs.validName
+    location: location
+
     allowInboundIpAddresses: allowInboundIpAddresses
     associationResourceIds: associateNsp
       ? [
@@ -177,6 +180,8 @@ module nspModule 'nsp.bicep' = if (deployNsp) {
       : []
 
     logAnalyticsWorkspaceId: logAnalyticsModule.outputs.resourceId
+
+    resourceAccessMode: resourceAccessMode
 
     tags: tags
   }

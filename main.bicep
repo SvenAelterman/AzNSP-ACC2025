@@ -13,6 +13,7 @@ param allowInboundIpAddresses string[] = []
 
 param deployNsp bool = false
 param associateNsp bool = false
+param resourceAccessMode ('Learning' | 'Enforced' | 'Audit') = 'Learning'
 
 var instanceFormatted = format('{0:00}', instance)
 
@@ -37,6 +38,7 @@ module resourcesModule 'resources.bicep' = {
 
     deployNsp: deployNsp
     associateNsp: associateNsp
+    resourceAccessMode: resourceAccessMode
   }
 }
 
