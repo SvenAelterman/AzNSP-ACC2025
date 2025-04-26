@@ -28,6 +28,8 @@ param location string
   'gal' // Azure Compute Gallery
   'id' // User-Assigned Managed Identity
   'sql' // Azure SQL server
+  'nsp' // Network Security Perimeter
+  'rg' // Resource Group
 ])
 param resourceType string
 param environment string
@@ -140,6 +142,16 @@ var Defs = {
     lowerCase: true
     maxLength: 63
     allowedSegmentSeparators: ['-']
+  }
+  nsp: {
+    lowerCase: false
+    maxLength: 80
+    allowedSegmentSeparators: ['-', '_']
+  }
+  rg: {
+    lowerCase: false
+    maxLength: 90
+    allowedSegmentSeparators: ['-', '_']
   }
 }
 
